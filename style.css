@@ -1,0 +1,200 @@
+body {
+    font-family: Georgia, serif;
+    background-color: #fdfaf5;
+    color: #222;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  
+  header {
+    text-align: center;
+    border-bottom: 3px solid black;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 2.5em;
+    margin: 0;
+  }
+  
+  .date {
+    font-style: italic;
+  }
+  
+  nav {
+    background-color: #3b5366;
+    text-align: center;
+    padding: 10px 0;
+  }
+  
+  .menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu li {
+    position: relative;
+  }
+  
+  .menu a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+  }
+  
+  .menu a:hover {
+    background-color: maroon;
+    border-radius: 4px;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #3b5366;
+    list-style: none;
+    min-width: 150px;
+    padding: 0;
+    z-index: 1000;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  .dropdown-content a {
+    color: white;
+    padding: 10px;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: maroon;
+  }
+  
+  .news-content {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  
+  article {
+    flex: 1;
+    background: #fff8e7;
+    border: 1px solid #ccc;
+    padding: 15px;
+  }
+  
+  article img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+    border: 2px solid black;
+  }
+  
+  .sidebar {
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .api-card {
+    background: #f0f0f0;
+    padding: 15px;
+    border-left: 5px solid #3b5366;
+    font-style: italic;
+  }
+  
+  .video-section {
+    text-align: center;
+    margin: 20px 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 20px 10px;
+  }
+  
+  .video-section button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #3b5366;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .video-section button:hover {
+    background-color: maroon;
+  }
+  
+  .feedback-section {
+    background-color: #fff4dd;
+    padding: 20px;
+    border-top: 2px solid #000;
+    margin-top: 40px;
+  }
+  
+  .feedback-section form {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .feedback-section label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+  }
+  
+  .feedback-section input,
+  .feedback-section textarea,
+  .feedback-section button,
+  .feedback-section output {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    box-sizing: border-box;
+  }
+  
+  .feedback-section button {
+    background-color: #3b5366;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .feedback-section button:hover {
+    background-color: maroon;
+  }
+  
+  .comment {
+    background: #fff;
+    border-left: 4px solid #999;
+    margin-top: 10px;
+    padding: 10px;
+  }
+  
+  footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .news-content {
+      flex-direction: column;
+    }
+  
+    .menu {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      flex-direction: column;
+    }
+  }

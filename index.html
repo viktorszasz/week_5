@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Chronicle</title>
+  <link rel="stylesheet" href="Style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>The Chronicle</h1>
+    <p class="date"><sup>20th March, 2025</sup></p>
+  </header>
+
+  <!-- Navigation Menu -->
+  <nav>
+    <ul class="menu">
+      <li class="dropdown">
+        <a href="#">Home</a>
+        <ul class="dropdown-content">
+          <li><a href="#">Latest</a></li>
+          <li><a href="#">Archives</a></li>
+          <li><a href="#">Subscribe</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">News</a>
+        <ul class="dropdown-content">
+          <li><a href="#">Local</a></li>
+          <li><a href="#">International</a></li>
+          <li><a href="#">Politics</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Weather</a>
+        <ul class="dropdown-content">
+          <li><a href="#">Today</a></li>
+          <li><a href="#">Weekly</a></li>
+          <li><a href="#">Climate</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#">Other</a>
+        <ul class="dropdown-content">
+          <li><a href="#">Opinion</a></li>
+          <li><a href="#">Technology</a></li>
+          <li><a href="#">Sports</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="news-content">
+      <article>
+        <h2><a href="whale-article.html" target="_blank">Entangled whale dies on beach</a></h2>
+        <img src="whale.jpg" alt="Stranded Whale" />
+        <p>A sperm whale washed up on the island of Raasay had been entangled in ropes. It was the latest in a series of whale entanglements off the Scottish coast.</p>
+      </article>
+
+      <article>
+        <h2><a href="stonecircle-article.html" target="_blank">Bronze Age stone circle uncovered</a></h2>
+        <img src="stonecircle.jpg" alt="Bronze Age Stone Circle" />
+        <p>Archaeologists discovered a 3,700-year-old ceremonial site in Derbyshire. It was thought to be a single stone until excavation revealed more.</p>
+      </article>
+    </section>
+
+    <!-- Sidebar with API content -->
+    <aside class="sidebar">
+      <section class="api-card">
+        <h3>Quote of the Day</h3>
+        <p id="quote">Loading quote...</p>
+        <button onclick="loadQuote()">Refresh Quote</button>
+      </section>
+
+      <section class="api-card">
+        <h3>Joke of the Day</h3>
+        <p id="joke">Loading joke...</p>
+        <button onclick="loadJoke()">Refresh Joke</button>
+      </section>
+
+      <section class="api-card">
+        <h3>Did You Know?</h3>
+        <p id="fact">Loading fact...</p>
+        <button onclick="loadFact()">Refresh Fact</button>
+      </section>
+    </aside>
+
+    <!-- Video Section -->
+    <section class="video-section">
+      <h2>Video</h2>
+      <p>Watch Carl Sagan's 1990 address on climate change at the Emerging Issues Forum, NCSU.</p>
+      <a href="https://www.youtube.com/watch?v=4C6co5qXEE4"><button>Watch Video</button></a>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="feedback-section">
+      <h2>Reader Feedback</h2>
+      <form id="feedbackForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required />
+
+        <label for="comment">Comment:</label>
+        <textarea id="comment" required></textarea>
+
+        <label for="rating">Rate this article (1–5):</label>
+        <input type="range" id="rating" min="1" max="5" value="3" />
+        <output id="ratingOutput">3</output>
+
+        <button type="submit">Submit</button>
+      </form>
+
+      <div id="commentList">
+        <h3>Reader Comments:</h3>
+      </div>
+    </section>
+
+    <footer>
+      <h3>References</h3>
+      <ul>
+        <li>Whale article: <a href="https://www.bbc.co.uk/news/articles/cy9dxrr2x5lo">BBC News</a></li>
+        <li>Stone Circle article: <a href="https://www.bbc.com/news/articles/c5y06r662jzo">BBC News</a></li>
+        <li>Video: <a href="https://www.youtube.com/watch?v=4C6co5qXEE4">YouTube</a></li>
+      </ul>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("rating").addEventListener("input", function () {
+      document.getElementById("ratingOutput").textContent = this.value;
+    });
+
+    document.getElementById("feedbackForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const comment = document.getElementById("comment").value;
+      const rating = document.getElementById("rating").value;
+      const newComment = document.createElement("div");
+      newComment.className = "comment";
+      newComment.innerHTML = `<strong>${name}</strong>: "${comment}" (Rated ${rating}/5)`;
+      document.getElementById("commentList").appendChild(newComment);
+      this.reset();
+      document.getElementById("ratingOutput").textContent = "3";
+    });
+
+    function loadQuote() {
+      fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://api.quotable.io/random"))
+        .then(res => res.json())
+        .then(data => {
+          const parsed = JSON.parse(data.contents);
+          document.getElementById("quote").textContent = `"${parsed.content}" – ${parsed.author}`;
+        })
+        .catch(() => {
+          document.getElementById("quote").textContent = "Failed to load quote.";
+        });
+    }
+
+    function loadJoke() {
+      fetch("https://v2.jokeapi.dev/joke/Any?type=single")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("joke").textContent = data.joke;
+        })
+        .catch(() => {
+          document.getElementById("joke").textContent = "Failed to load joke.";
+        });
+    }
+
+    function loadFact() {
+      fetch("https://uselessfacts.jsph.pl/random.json?language=en")
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("fact").textContent = data.text;
+        })
+        .catch(() => {
+          document.getElementById("fact").textContent = "Failed to load fact.";
+        });
+    }
+
+    // Load all on page load
+    loadQuote();
+    loadJoke();
+    loadFact();
+  </script>
+</body>
+</html>
